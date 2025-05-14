@@ -24,3 +24,29 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+Cypress.Commands.add('selectSortOption', (optionText) => {
+    cy.get('[data-test="product_sort_container"]').select(optionText);
+});
+// cy.selectSortOption('Price (low to high)');
+
+Cypress.Commands.add('addProductToCart', (productName) => {
+    cy.contains('.inventory_item', productName)
+        .find('button')
+        .click();
+});
+// cy.addProductToCart('Sauce Labs Backpack');
+
+Cypress.Commands.add('removeProductFromCart', (productName) => {
+    cy.contains('.cart_item', productName)
+        .find('button')
+        .click();
+});
+// cy.removeProductFromCart('Sauce Labs Backpack');
+
+Cypress.Commands.add('login', (username, password) => {
+    cy.visit('https://www.saucedemo.com/');
+    cy.get('[data-test="username"]').type(username);
+    cy.get('[data-test="password"]').type(password);
+    cy.get('[data-test="login-button"]').click();
+  });
+// cy.login()
